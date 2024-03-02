@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
 
 	"github.com/Sourjaya/discord-bot/mux"
@@ -52,41 +51,41 @@ func mSend(discord *discordgo.Session, message *discordgo.MessageCreate) {
 		return
 	}
 
-	helpMessage := &discordgo.MessageSend{
-		Embeds: []*discordgo.MessageEmbed{{
-			Type:        discordgo.EmbedTypeRich,
-			Title:       "Help",
-			Description: "Help for Weather Bot",
-			Fields: []*discordgo.MessageEmbedField{
-				{
-					Name:   "Command Syntax",
-					Value:  "!weather <location name>",
-					Inline: true,
-				},
-				{
-					Name:   "Command Example 1",
-					Value:  "!weather kolkata",
-					Inline: true,
-				},
-				{
-					Name:   "Command Example 2",
-					Value:  "!weather Rio De Janeiro",
-					Inline: true,
-				},
-			},
-		},
-		},
-	}
+	// helpMessage := &discordgo.MessageSend{
+	// 	Embeds: []*discordgo.MessageEmbed{{
+	// 		Type:        discordgo.EmbedTypeRich,
+	// 		Title:       "Help",
+	// 		Description: "Help for Weather Bot",
+	// 		Fields: []*discordgo.MessageEmbedField{
+	// 			{
+	// 				Name:   "Command Syntax",
+	// 				Value:  "!weather <location name>",
+	// 				Inline: true,
+	// 			},
+	// 			{
+	// 				Name:   "Command Example 1",
+	// 				Value:  "!weather kolkata",
+	// 				Inline: true,
+	// 			},
+	// 			{
+	// 				Name:   "Command Example 2",
+	// 				Value:  "!weather Rio De Janeiro",
+	// 				Inline: true,
+	// 			},
+	// 		},
+	// 	},
+	// 	},
+	// }
 	// Respond to messages
 
-	if message.Content == "!weatherhelp" {
-		if _, err := discord.ChannelMessageSendComplex(message.ChannelID, helpMessage); err != nil {
-			log.Fatalf("Error while sending message over channel: %v", err)
-		}
-	} else if strings.Contains(message.Content, "!weather") {
-		cWeather := getWeather(message.Content, WeatherAPIToken)
-		if _, err := discord.ChannelMessageSendComplex(message.ChannelID, cWeather); err != nil {
-			log.Fatalf("Error while sending message over channel: %v", err)
-		}
-	}
+	// if message.Content == "!weatherhelp" {
+	// 	if _, err := discord.ChannelMessageSendComplex(message.ChannelID, helpMessage); err != nil {
+	// 		log.Fatalf("Error while sending message over channel: %v", err)
+	// 	}
+	// } else if strings.Contains(message.Content, "!weather") {
+	// 	cWeather := getWeather(message.Content, WeatherAPIToken)
+	// 	if _, err := discord.ChannelMessageSendComplex(message.ChannelID, cWeather); err != nil {
+	// 		log.Fatalf("Error while sending message over channel: %v", err)
+	// 	}
+	// }
 }
